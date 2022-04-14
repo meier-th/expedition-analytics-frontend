@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+    <form class="login" [formGroup]="registerControl">
+        <section class="title">
+            <h3 class="welcome">Welcome to</h3>
+            ExpeditionAnalytics
+        </section>
+        <div class="login-group">
+            <clr-input-container>
+                <label class="clr-sr-only">Username</label>
+                <input type="text" name="username" clrInput placeholder="Username" formControlName="username"/>
+            </clr-input-container>
+            <clr-select-container>
+                <label class="clr-sr-only">Role</label>
+                <select clrSelect name="role" formControlName="role">
+                    <option value="ADMIN">Admin</option>
+                    <option value="ANALYTICS">Analytic</option>
+                    <option value="DATA_FEEDER">Feeder</option>
+                </select>
+            </clr-select-container>
+            <clr-password-container>
+                <label class="clr-sr-only">Password</label>
+                <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+            </clr-password-container>
+            <clr-password-container>
+                <label class="clr-sr-only">Repeat password</label>
+                <input type="password" name="password" clrPassword placeholder="Repeat password" formControlName="repeatPassword"/>
+            </clr-password-container>
+            <div id="error-label" class="error">
+                Username is already occupied
+            </div>
+            <button (click)="signup()" type="submit" class="btn btn-primary">Sign up</button>
+            <a routerLink="/login" class="signup">Sign in</a>
+        </div>
+    </form>
+</div>
