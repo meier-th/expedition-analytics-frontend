@@ -4,7 +4,7 @@ import { Interval } from "./interval";
 import { Ship } from "./ship";
 
 export class Expedition {
-    id: number;
+    id?: number;
     startCity: City;
     finishcity: City;
     ship: Ship;

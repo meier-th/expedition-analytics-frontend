@@ -1,5 +1,5 @@
 export class Ship {
-    id: number;
+    id?: number;
     name: string;
     speed: number;
     fuelConsumption: number;

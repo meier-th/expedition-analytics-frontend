@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/model/role';
+import { AnalyticService } from 'src/app/service/analytic/analytic.service';
 import { LoginService } from 'src/app/service/login/login.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { LoginService } from 'src/app/service/login/login.service';
 })
 export class AnalyticsComponent implements OnInit {
 
-  constructor(private auth: LoginService, private router: Router) { }
+  constructor(private auth: LoginService, private router: Router, private analyticsService :
+    AnalyticService) { }
 
   ngOnInit(): void {
     if (this.auth.user == undefined || !this.auth.user.loggedIn) {

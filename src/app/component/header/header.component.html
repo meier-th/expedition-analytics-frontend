@@ -6,7 +6,7 @@
     </div>
     <div *ngIf="auth.user.loggedIn" class="header-nav" [clr-nav-level]="1">
       <a *ngIf="isAnalytic()" routerLink="analytics" routerLinkActive="active" class="nav-link nav-text">Analysis</a>
-      <a routerLink="insertion" routerLinkActive="active" class="nav-link nav-text">Insert Data</a>
+      <a *ngIf="isFeeder()" routerLink="insertion" routerLinkActive="active" class="nav-link nav-text">Insert Data</a>
     </div>
     <div class="header-actions">
       <clr-dropdown *ngIf="auth.user.loggedIn">

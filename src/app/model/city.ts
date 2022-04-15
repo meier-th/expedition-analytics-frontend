@@ -1,5 +1,5 @@
 export class City {
-    id: number;
+    id?: number;
     name: string;
     latitude: number;
     longitude: number;

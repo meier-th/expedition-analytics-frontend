@@ -1,5 +1,96 @@
 <div class="content-container">
     <div class="content-area">
-        Insertion
+        <div class="grid-cell">
+        <h3 class="welcome">Insert an expedition</h3>
+        <form [formGroup]="expeditionControl">
+            <clr-select-container>
+                <label>Ship</label>
+                <select clrSelect name="ship" formControlName="ship">
+                  <option *ngFor="let ship of options.ships" value={{ship.id}}>{{ship.name}}</option>
+                </select>
+            </clr-select-container>
+            <clr-select-container>
+                <label>Crew</label>
+                <select clrSelect name="crew" formControlName="crew">
+                  <option *ngFor="let crew of options.crews" value={{crew.id}}>{{crew.name}}</option>
+                </select>
+            </clr-select-container>
+            <clr-select-container>
+                <label>Start city</label>
+                <select clrSelect name="startCity" formControlName="startCity">
+                  <option *ngFor="let city of options.cities" value={{city.id}}>{{city.name}}</option>
+                </select>
+            </clr-select-container>
+            <clr-select-container>
+                <label>Finish city</label>
+                <select clrSelect name="finishCity" formControlName="finishCity">
+                  <option *ngFor="let city of options.cities" value={{city.id}}>{{city.name}}</option>
+                </select>
+            </clr-select-container>
+            <clr-date-container>
+                <label>Start date</label>
+                <input clrDate placeholder="Pick a date" name="startDate" formControlName="startDate" />
+            </clr-date-container>
+            <clr-date-container>
+                <label>Finish date</label>
+                <input clrDate placeholder="Pick a date" name="endDate" formControlName="endDate" />
+            </clr-date-container>  
+            <clr-input-container>
+                <label>Profit</label>
+                <input clrInput placeholder="Profit" name="profit" formControlName="profit" />
+            </clr-input-container>
+            <clr-alert id="expeditionAlert" clrAlertType="danger">Fill all the fields</clr-alert>
+            <button (click)="insertExpedition()" type="submit" class="btn btn-primary">Insert</button>
+        </form>
+        </div>
+        <div class="grid-cell">
+        <h3 class="welcome">Insert a ship</h3>
+        <form [formGroup]="shipControl">
+            <clr-input-container>
+                <label>Name</label>
+                <input clrInput placeholder="name" name="name" formControlName="name" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Speed</label>
+                <input clrInput placeholder="speed" name="speed" formControlName="speed" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Fuel consumption</label>
+                <input clrInput placeholder="fuel consumption" name="fuelConsumption" formControlName="fuelConsumption" />
+            </clr-input-container>
+            <clr-alert id="shipAlert" clrAlertType="danger">Fill all the fields</clr-alert>
+            <button (click)="insertShip()" type="submit" class="btn btn-primary">Insert</button>
+        </form>
+        </div>
+        <div class="grid-cell">
+        <h3 class="welcome">Insert a crew</h3>
+        <form [formGroup]="crewControl">
+            <clr-input-container>
+                <label>Name</label>
+                <input clrInput placeholder="name" name="name" formControlName="name" />
+            </clr-input-container>
+            <clr-alert id="crewAlert" clrAlertType="danger">Fill all the fields</clr-alert>
+            <button (click)="insertCrew()" type="submit" class="btn btn-primary">Insert</button>
+        </form>
+        </div>
+        <div class="grid-cell">
+        <h3 class="welcome">Insert a city</h3>
+        <form [formGroup]="cityControl">
+            <clr-input-container>
+                <label>Name</label>
+                <input clrInput placeholder="name" name="name" formControlName="name" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Longitude</label>
+                <input clrInput placeholder="longitude" name="longitude" formControlName="longitude" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Latitude</label>
+                <input clrInput placeholder="latitude" name="latitude" formControlName="latitude" />
+            </clr-input-container>
+            <clr-alert id="cityAlert" clrAlertType="danger">Fill all the fields</clr-alert>
+            <button (click)="insertCity()" type="submit" class="btn btn-primary">Insert</button>
+        </form>
+        </div>
     </div>
 </div>

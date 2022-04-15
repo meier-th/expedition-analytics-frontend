@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
     return this.auth.user.role === Role.ADMIN || this.auth.user.role === Role.ANALYTICS;
   }
 
+  isFeeder() {
+    return this.auth.user.role === Role.ADMIN || this.auth.user.role === Role.DATA_FEEDER;
+  }
 
   constructor(public auth: LoginService, private router: Router) { }
 
