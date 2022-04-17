@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/service/login/login.service';
 import { City } from 'src/app/model/city';
 import { Ship } from 'src/app/model/ship';
 import { Crew } from 'src/app/model/crew';
+import { _ } from 'ajv';
 
 @Component({
   selector: 'app-insertion',
@@ -20,6 +21,7 @@ import { Crew } from 'src/app/model/crew';
 export class InsertionComponent implements OnInit {
 
   public options: Options = {ships: [], routes: [], cities:[], crews: [], timeRange: {start: null, finish: null}};
+  public loading: boolean;
 
   private exepeditionPrefix = 'expedition';
   private shipPrefix = 'ship';
@@ -56,16 +58,21 @@ export class InsertionComponent implements OnInit {
     InsertionService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    if (this.auth.user == undefined || !this.auth.user.loggedIn) {
-      this.router.navigateByUrl('/login');
-    } else {
+    this.refreshOptions();
+    this.auth.checkIfSignedIn()
+    .subscribe(res => {
+      if (res == null) {
+        this.router.navigateByUrl('/login');
+      }
+      this.auth.user.username = res.username;
+      this.auth.user.role = res.role;
+      this.auth.user.loggedIn = true;
       if (this.auth.user.role === Role.ANALYTICS) {
         this.router.navigateByUrl('/analytics');
-      } else {
-        this.hideErrors();
-        this.refreshOptions();
       }
-    }
+    }, err => {
+      this.router.navigateByUrl('/login');
+    })
   }
 
   insertExpedition() {
@@ -79,6 +86,12 @@ export class InsertionComponent implements OnInit {
       let profit = this.expeditionControl.get('profit').value;
       let ship = this.expeditionControl.get('ship').value;
       let crew = this.expeditionControl.get('crew').value;
+
+      console.log("start city: "+startCity);
+      console.log("finish city: "+finishCity);
+      console.log("crew "+crew);
+      console.log("ship: "+ship);
+      
       
       if (profit == '' || ship == '' || crew == '') {
         this.showError(this.exepeditionPrefix);
@@ -88,29 +101,30 @@ export class InsertionComponent implements OnInit {
       expedition.profit = profit;
       expedition.interval = {startDate: this.datePipe.transform(startDate, 'dd-MM-yyyy'), finishDate: this.datePipe.transform(endDate, 'dd-MM-yyyy') };
       this.options.cities.forEach(city => {
-        if (city.id === startCity) {
+        console.log("city id: "+city.id);
+        if (city.id == startCity) {
           expedition.startCity = city;
         }
-        if (city.id === finishCity) {
-          expedition.finishcity = city;
+        if (city.id == finishCity) {
+          expedition.finishCity = city;
         }
       });
       this.options.ships.forEach(shp => {
-        if (shp.id === ship) {
+        if (shp.id == ship) {
           expedition.ship = shp;
         }
       });
       this.options.crews.forEach(crw => {
-        if (crw.id === crew) {
+        if (crw.id == crew) {
           expedition.crew = crw;
         }
       });
+      console.log(expedition);
 
       this.insertionService.insertExpedition(expedition).pipe(catchError(err => {
         this.showError(this.exepeditionPrefix);
         return null;
       })).subscribe(res => {
-        this.hideError(this.exepeditionPrefix);
         this.expeditionControl.reset();
       });
     } else {
@@ -138,7 +152,6 @@ export class InsertionComponent implements OnInit {
       this.showError(this.cityPrefix);
       return null;
     })).subscribe(res => {
-      this.hideError(this.cityPrefix);
       this.cityControl.reset();
       this.refreshOptions();
     });
@@ -164,7 +177,6 @@ export class InsertionComponent implements OnInit {
       this.showError(this.shipPrefix);
       return null;
     })).subscribe(res => {
-      this.hideError(this.shipPrefix);
       this.shipControl.reset();
       this.refreshOptions();
     });
@@ -184,7 +196,6 @@ export class InsertionComponent implements OnInit {
       this.showError(this.crewPrefix);
       return null;
     })).subscribe(res => {
-      this.hideError(this.crewPrefix);
       this.crewControl.reset();
       this.refreshOptions();
     });
@@ -201,25 +212,16 @@ export class InsertionComponent implements OnInit {
   }
 
   refreshOptions() {
+    this.loading = true;
     this.insertionService.getOptions().subscribe(opts => {
       this.options = opts;
       this.expeditionControl.reset();
+      this.loading = false;
     })
-  }
-
-  hideErrors() {
-    this.hideError(this.exepeditionPrefix);
-    this.hideError(this.shipPrefix);
-    this.hideError(this.crewPrefix);
-    this.hideError(this.cityPrefix);
   }
 
   showError(form: string) {
     document.getElementById(form+'Alert').style.display = 'block';
-  }
-
-  hideError(form: string) {
-    document.getElementById(form+'Alert').style.display = 'none';
   }
 
 }

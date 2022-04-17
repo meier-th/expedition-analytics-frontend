@@ -2,7 +2,8 @@
     <div class="content-area">
         <div class="grid-cell">
         <h3 class="welcome">Insert an expedition</h3>
-        <form [formGroup]="expeditionControl">
+        <clr-spinner id="loading" *ngIf="loading">Loading photos</clr-spinner>
+        <form *ngIf="!loading" [formGroup]="expeditionControl">
             <clr-select-container>
                 <label>Ship</label>
                 <select clrSelect name="ship" formControlName="ship">
@@ -39,7 +40,6 @@
                 <label>Profit</label>
                 <input clrInput placeholder="Profit" name="profit" formControlName="profit" />
             </clr-input-container>
-            <clr-alert id="expeditionAlert" clrAlertType="danger">Fill all the fields</clr-alert>
             <button (click)="insertExpedition()" type="submit" class="btn btn-primary">Insert</button>
         </form>
         </div>
@@ -58,7 +58,6 @@
                 <label>Fuel consumption</label>
                 <input clrInput placeholder="fuel consumption" name="fuelConsumption" formControlName="fuelConsumption" />
             </clr-input-container>
-            <clr-alert id="shipAlert" clrAlertType="danger">Fill all the fields</clr-alert>
             <button (click)="insertShip()" type="submit" class="btn btn-primary">Insert</button>
         </form>
         </div>
@@ -69,7 +68,6 @@
                 <label>Name</label>
                 <input clrInput placeholder="name" name="name" formControlName="name" />
             </clr-input-container>
-            <clr-alert id="crewAlert" clrAlertType="danger">Fill all the fields</clr-alert>
             <button (click)="insertCrew()" type="submit" class="btn btn-primary">Insert</button>
         </form>
         </div>
@@ -88,7 +86,6 @@
                 <label>Latitude</label>
                 <input clrInput placeholder="latitude" name="latitude" formControlName="latitude" />
             </clr-input-container>
-            <clr-alert id="cityAlert" clrAlertType="danger">Fill all the fields</clr-alert>
             <button (click)="insertCity()" type="submit" class="btn btn-primary">Insert</button>
         </form>
         </div>

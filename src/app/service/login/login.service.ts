@@ -54,10 +54,9 @@ export class LoginService {
   }
 
   checkIfSignedIn(){
-    return this.http.get(serverAddress+'me',
+    return this.http.get<UserDto>(serverAddress+'me',
     {
-      withCredentials: true,
-      responseType: 'text'
+      withCredentials: true
     });
   }
 

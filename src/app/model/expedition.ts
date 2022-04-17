@@ -6,7 +6,7 @@ import { Ship } from "./ship";
 export class Expedition {
     id?: number;
     startCity: City;
-    finishcity: City;
+    finishCity: City;
     ship: Ship;
     crew: Crew;
     interval: Interval;

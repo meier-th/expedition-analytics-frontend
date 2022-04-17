@@ -1,5 +1,59 @@
 <div class="content-container">
     <div class="content-area">
-        Analytics
+        <h3 class="welcome">Analytics</h3>
+        <form [formGroup]="parametersControl">
+            <div class="grid-panel">
+                <div class="grid-cell">
+                    <clr-spinner id="loadingShips" *ngIf="loading">Loading ships</clr-spinner>
+                    <clr-select-container *ngIf="!loading">
+                        <label>Ship</label>
+                        <select clrSelect name="ship" formControlName="ship">
+                            <option *ngFor="let ship of options.ships" value={{ship.id}}>{{ship.name}}</option>
+                        </select>
+                    </clr-select-container>
+                </div>
+                <div class="grid-cell">
+                    <clr-spinner id="loadingCrews" *ngIf="loading">Loading crews</clr-spinner>
+                    <clr-select-container *ngIf="!loading">
+                        <label>Crew</label>
+                        <select clrSelect name="crew" formControlName="crew">
+                            <option *ngFor="let crew of options.crews" value={{crew.id}}>{{crew.name}}</option>
+                        </select>
+                    </clr-select-container>
+                </div>
+                <div class="grid-cell">
+                    <clr-spinner id="loadingRoutes" *ngIf="loading">Loading routes</clr-spinner>
+                    <clr-select-container *ngIf="!loading">
+                        <label>Route</label>
+                        <select clrSelect name="route" formControlName="route">
+                            <option *ngFor="let route of options.routes" value={{route.id}}>{{route.from.name}} - {{route.to.name}}</option>
+                        </select>
+                    </clr-select-container>
+                </div>
+                <div class="grid-cell">
+                    <clr-date-container>
+                        <label>Start date</label>
+                        <input clrDate placeholder="Pick a date" name="startDate" formControlName="startDate" />
+                    </clr-date-container>
+                </div>
+                <div class="grid-cell">
+                    <clr-date-container>
+                        <label>Finish date</label>
+                        <input clrDate placeholder="Pick a date" name="finishDate" formControlName="finishDate" />
+                    </clr-date-container>
+                </div>
+                <div class="grid-cell">
+                    <clr-select-container>
+                        <label>Group by</label>
+                        <select clrSelect name="groupBy" formControlName="groupBy">
+                            <option *ngFor="let groupBy of groupBys" value={{groupBy}}>{{groupBy}}</option>
+                        </select>
+                    </clr-select-container>
+                </div>
+                <div class="grid-cell">
+                    <button (click)="updateAnalytics()" type="submit" class="btn btn-primary">Show</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
