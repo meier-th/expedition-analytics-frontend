@@ -11,7 +11,6 @@ import { LoginService } from 'src/app/service/login/login.service';
 import { City } from 'src/app/model/city';
 import { Ship } from 'src/app/model/ship';
 import { Crew } from 'src/app/model/crew';
-import { _ } from 'ajv';
 
 @Component({
   selector: 'app-insertion',

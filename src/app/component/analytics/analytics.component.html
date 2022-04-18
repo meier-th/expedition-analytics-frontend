@@ -5,30 +5,52 @@
             <div class="grid-panel">
                 <div class="grid-cell">
                     <clr-spinner id="loadingShips" *ngIf="loading">Loading ships</clr-spinner>
-                    <clr-select-container *ngIf="!loading">
-                        <label>Ship</label>
-                        <select clrSelect name="ship" formControlName="ship">
-                            <option *ngFor="let ship of options.ships" value={{ship.id}}>{{ship.name}}</option>
-                        </select>
-                    </clr-select-container>
+
+                    <clr-combobox-container *ngIf="!loading">
+                        <label>Ships</label>
+                        <clr-combobox formControlName="ship" name="ship" clrMulti="true">
+                            <ng-container *clrOptionSelected="let selected">
+                                {{selected?.name}}
+                              </ng-container>
+                          <clr-options>
+                            <clr-option *clrOptionItems="let ship of options.ships" [clrValue]="ship"> {{ship.name}}
+                            </clr-option>
+                          </clr-options>
+                        </clr-combobox>
+                      </clr-combobox-container>
                 </div>
                 <div class="grid-cell">
                     <clr-spinner id="loadingCrews" *ngIf="loading">Loading crews</clr-spinner>
-                    <clr-select-container *ngIf="!loading">
-                        <label>Crew</label>
-                        <select clrSelect name="crew" formControlName="crew">
-                            <option *ngFor="let crew of options.crews" value={{crew.id}}>{{crew.name}}</option>
-                        </select>
-                    </clr-select-container>
+
+                    <clr-combobox-container *ngIf="!loading">
+                        <label>Crews</label>
+                        <clr-combobox formControlName="crew" name="crew" clrMulti="true">
+                            <ng-container *clrOptionSelected="let selected">
+                                {{selected?.name}}
+                              </ng-container>
+                          <clr-options>
+                            <clr-option *clrOptionItems="let crew of options.crews" [clrValue]="crew"> {{crew.name}}
+                            </clr-option>
+                          </clr-options>
+                        </clr-combobox>
+                      </clr-combobox-container>
                 </div>
                 <div class="grid-cell">
-                    <clr-spinner id="loadingRoutes" *ngIf="loading">Loading routes</clr-spinner>
-                    <clr-select-container *ngIf="!loading">
-                        <label>Route</label>
-                        <select clrSelect name="route" formControlName="route">
-                            <option *ngFor="let route of options.routes" value={{route.id}}>{{route.from.name}} - {{route.to.name}}</option>
-                        </select>
-                    </clr-select-container>
+                    <clr-spinner id="loadingRoutes" *ngIf="loading">Loading crews</clr-spinner>
+
+                    <clr-combobox-container *ngIf="!loading">
+                        <label>Routes</label>
+                        <clr-combobox formControlName="route" name="route" clrMulti="true">
+                            <ng-container *clrOptionSelected="let selected">
+                                {{selected?.from.name}} - {{selected?.to.name}}
+                              </ng-container>
+                          <clr-options>
+                            <clr-option *clrOptionItems="let route of options.routes" [clrValue]="route"> 
+                                {{route.from.name}} - {{route.to.name}}
+                            </clr-option>
+                          </clr-options>
+                        </clr-combobox>
+                      </clr-combobox-container>
                 </div>
                 <div class="grid-cell">
                     <clr-date-container>
@@ -46,6 +68,7 @@
                     <clr-select-container>
                         <label>Group by</label>
                         <select clrSelect name="groupBy" formControlName="groupBy">
+                            <option value=""></option>
                             <option *ngFor="let groupBy of groupBys" value={{groupBy}}>{{groupBy}}</option>
                         </select>
                     </clr-select-container>

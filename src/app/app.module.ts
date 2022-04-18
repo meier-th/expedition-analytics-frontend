@@ -10,7 +10,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { AnalyticsComponent } from './component/analytics/analytics.component';
 import { InsertionComponent } from './component/insertion/insertion.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common'
 
@@ -29,7 +29,8 @@ import { DatePipe } from '@angular/common'
     HttpClientModule,
     ClarityModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
