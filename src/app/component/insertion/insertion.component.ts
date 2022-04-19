@@ -85,12 +85,6 @@ export class InsertionComponent implements OnInit {
       let profit = this.expeditionControl.get('profit').value;
       let ship = this.expeditionControl.get('ship').value;
       let crew = this.expeditionControl.get('crew').value;
-
-      console.log("start city: "+startCity);
-      console.log("finish city: "+finishCity);
-      console.log("crew "+crew);
-      console.log("ship: "+ship);
-      
       
       if (profit == '' || ship == '' || crew == '') {
         this.showError(this.exepeditionPrefix);
@@ -100,7 +94,6 @@ export class InsertionComponent implements OnInit {
       expedition.profit = profit;
       expedition.interval = {startDate: this.datePipe.transform(startDate, 'dd-MM-yyyy'), finishDate: this.datePipe.transform(endDate, 'dd-MM-yyyy') };
       this.options.cities.forEach(city => {
-        console.log("city id: "+city.id);
         if (city.id == startCity) {
           expedition.startCity = city;
         }
@@ -118,12 +111,14 @@ export class InsertionComponent implements OnInit {
           expedition.crew = crw;
         }
       });
-      console.log(expedition);
 
+      this.loading = true;
       this.insertionService.insertExpedition(expedition).pipe(catchError(err => {
         this.showError(this.exepeditionPrefix);
+        this.loading = false;
         return null;
       })).subscribe(res => {
+        this.loading = false;
         this.expeditionControl.reset();
       });
     } else {

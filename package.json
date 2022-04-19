@@ -24,6 +24,7 @@
     "@clr/ui": "^13.0.3",
     "@webcomponents/custom-elements": "^1.0.0",
     "ajv": "^8.11.0",
+    "chart.js": "^3.7.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

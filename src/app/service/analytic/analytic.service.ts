@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Query } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Aggregate } from 'src/app/model/dto/aggregate';
 import { AggregateRange } from 'src/app/model/dto/aggregaterange';
 import { GroupedRequestDto } from 'src/app/model/dto/groupedrequest';
 import { Options } from 'src/app/model/dto/options';
+import { Query } from 'src/app/model/dto/query';
 import { serverAddress } from 'src/environments/environment';
 
 @Injectable({

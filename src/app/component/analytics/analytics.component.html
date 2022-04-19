@@ -78,5 +78,23 @@
                 </div>
             </div>
         </form>
+        <div class="analytic-data" *ngIf="showFull">
+            <div class="analytic-field">
+                Sum profit: {{aggregate.sum}}
+            </div>
+            <div class="analytic-field">
+            Average profit:
+            {{aggregate.avg}}
+            </div>
+            <div class="analytic-field">
+            Number of expeditions:
+            {{aggregate.count}}
+            </div>
+        </div>
+        <div id="charts" class="analytic-data">
+            <canvas class="canvas" id="sumChart"></canvas>
+            <canvas class="canvas" id="averageChart"></canvas>
+            <canvas class="canvas" id="countChart"></canvas>
+        </div>
     </div>
 </div>
